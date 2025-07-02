@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia de Vilões dos Games – Como Derrotar</title>
+  <meta name="description" content="Vilões dos jogos: história, ponto fraco e como derrotar. Guia com tabela gerada por JavaScript.">
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Vilões dos Games – Como Derrotá-los" />
+  <meta property="og:description" content="Veja como vencer os vilões dos games com fraquezas e estratégias." />
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Viloes+dos+Games" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vilões dos Games" />
+  <meta name="twitter:description" content="Descubra como derrotar os chefes mais difíceis dos jogos." />
+
+  <style>
+    /* Estilo geral do corpo da página */
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212; /* Fundo escuro */
+      color: #e0e0e0; /* Cor do texto clara */
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Título principal */
+    h1 {
+      color: #e74c3c; /* Vermelho vibrante */
+      text-align: center;
+    }
+
+    /* Estilo da tabela */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    /* Estilo das células da tabela */
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+    }
+
+    /* Cabeçalho da tabela */
+    th {
+      background: #222;
+      color: #fff;
+    }
+
+    /* Cor de fundo alternada para linhas pares */
+    tr:nth-child(even) {
+      background: #1a1a1a;
+    }
+
+    /* Classe para ponto fraco com cor verde */
+    .weak { 
+      color: #2ecc71; 
+      font-weight: bold; 
+    }
+
+    /* Classe para estratégia com cor azul */
+    .strategy { 
+      color: #3498db; 
+    }
+
+    /* Estilo do popup de propaganda piscante - versão ajustada */
+    .ads-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ffda00; /* amarelo dourado bem chamativo */
+      color: #000; /* texto preto para máximo contraste */
+      padding: 25px 30px;
+      border: 4px solid #d4af37; /* borda dourada */
+      z-index: 9999; /* Fica acima de tudo */
+      animation: blink 4s infinite; /* pisca menos e mais suave */
+      max-width: 340px;
+      text-align: center;
+      box-shadow: 0 0 30px 6px rgba(212, 175, 55, 0.9); /* sombra dourada para destacar */
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1em;
+    }
+
+    /* Botão para fechar o popup - com cor forte e hover mais visível */
+    .ads-popup button {
+      margin-top: 15px;
+      padding: 8px 18px;
+      background: #d32f2f; /* vermelho escuro */
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 900;
+      font-size: 1em;
+      box-shadow: 0 3px 6px rgba(211, 47, 47, 0.7);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ads-popup button:hover {
+      background: #b71c1c; /* vermelho ainda mais forte no hover */
+      box-shadow: 0 5px 12px rgba(183, 28, 28, 0.9);
+    }
+
+    /* Animação para piscar - mais lenta e suave */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; } /* leve semi-transparência */
+    }
+
+    /* Container do vídeo */
+    #video-container {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* Estilo do iframe do vídeo */
+    #video-container iframe {
+      border: none;
+      max-width: 100%;
+    }
+
+    /* Estilo para o código aleatório exibido no corpo da página */
+    #codigo-no-corpo {
+      margin-top: 20px;
+      font-size: 1.3em;
+      text-align: center;
+      color: #2ecc71;
+      font-weight: bold;
+      user-select: all; /* Permite copiar o código facilmente */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Título principal da página -->
+  <h1>Vilões dos Games – Como Derrotar</h1>
+
+  <!-- Exibe o código aleatório também no corpo da página -->
+  <div id="codigo-no-corpo"></div>
+
+  <!-- Vídeo aleatório fora do popup -->
+  <div id="video-container">
+    <h2>🎮 Dica em Vídeo</h2>
+    <!-- iframe para carregar vídeo do YouTube -->
+    <iframe id="ad-video" width="560" height="315" allowfullscreen></iframe>
+  </div>
+
+  <!-- Tabela para listar os vilões -->
+  <table id="viloes-table">
+    <thead>
+      <tr>
+        <th>Vilão</th>
+        <th>Jogo</th>
+        <th>História</th>
+        <th>Ponto Fraco</th>
+        <th>Como Derrotar</th>
+      </tr>
+    </thead>
+    <tbody></tbody> <!-- Será preenchido via JavaScript -->
+  </table>
+
+  <!-- Propaganda Piscante (popup) -->
+  <div class="ads-popup" id="ad">
+    <strong id="ad-title">🔥 CONFERIR AGORA clique na oferta e descubra</strong><br>
+    <!-- Link clicável que será atualizado dinamicamente -->
+    <a href="#" target="_blank" id="ok">Clique aqui!</a>
+    <!-- Área para mostrar código único -->
+    <div id="unique-code" style="margin-top: 10px;"></div>
+    <br>
+    <!-- Botão para fechar o popup -->
+    <button onclick="document.getElementById('ad').style.display='none'">Fechar</button>
+  </div>
+
+  <script>
+    // Array com dados dos vilões
+    const viloes = [
+      {
+        nome: "Sephiroth",
+        jogo: "Final Fantasy VII",
+        historia: "Ex-SOLDIER corrompido que quer destruir o mundo com a energia de Jenova.",
+        pontoFraco: "Coração de Jenova",
+        comoDerrotar: "Use Limite Breaks e magias poderosas; mantenha cura constante."
+      },
+      {
+        nome: "Bowser",
+        jogo: "Super Mario",
+        historia: "Rei dos Koopas que vive sequestrando a Princesa Peach.",
+        pontoFraco: "Cauda e quedas",
+        comoDerrotar: "Aguarde o pulo e ataque pelas costas ou empurre para fora da arena."
+      },
+      {
+        nome: "Ganondorf",
+        jogo: "The Legend of Zelda",
+        historia: "Vilão da série Zelda que usa a Triforce do Poder para dominar Hyrule.",
+        pontoFraco: "Espada mestra e luz sagrada",
+        comoDerrotar: "Rebata os feitiços, ataque quando ele estiver vulnerável."
+      },
+      {
+        nome: "Albert Wesker",
+        jogo: "Resident Evil",
+        historia: "Cientista traidor, infectado com vírus, busca criar uma nova humanidade.",
+        pontoFraco: "Luz e velocidade",
+        comoDerrotar: "Use granadas de luz e ataque após esquivas."
+      },
+      {
+        nome: "Cut Man",
+        jogo: "Mega Man 1",
+        historia: "Robô com lâminas afiadas na cabeça, especialista em cortar.",
+        pontoFraco: "Arma: Rolling Cutter",
+        comoDerrotar: "Use o poder do Ice Man para congelá-lo e depois ataque."
+      }
+    ];
+
+    // Seleciona o corpo da tabela para inserir os vilões
+    const tbody = document.querySelector('#viloes-table tbody');
+
+    // Preenche a tabela com os dados dos vilões
+    viloes.forEach(vilao => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${vilao.nome}</td>
+        <td>${vilao.jogo}</td>
+        <td>${vilao.historia}</td>
+        <td class="weak">${vilao.pontoFraco}</td>
+        <td class="strategy">${vilao.comoDerrotar}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Array com links para a propaganda dinâmica
+    const links = [
+      {
+        url: "https://hostinger.com.br?REFERRALCODE=SSNVICTORXU8",
+        texto: "🔥 Economize com Hostinger!"
+      },
+      {
+        url: "https://geocredibnkvitoria.com/",
+        texto: "💰 Crédito rápido disponível"
+      },
+      {
+        url: "https://vpserp.vercel.app/",
+        texto: "⚙️ ERP Profissional"
+      },
+      {
+        url: "https://creditopessoal.vercel.app/",
+        texto: "📈 Simule seu crédito pessoal"
+      },
+      {
+        url: "https://bibliadonline.netlify.app/",
+        texto: "📖 Leia a Bíblia Online"
+      },
+      {
+        url: "https://piadasrepositorio.vercel.app/",
+        texto: "😂 Veja piadas novas"
+      },
+      {
+        url: "https://www.youtube.com/@gamenologia",
+        texto: "🎮 Gamenologia no YouTube"
+      },
+      {
+        url: "https://wa.me/5527998950540?text=Ol%C3%A1,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20laudo%20pericial.",
+        texto: "Solicite agora seu <strong>Laudo Pericial Bancário</strong> e descubra!"
+      },
+      {
+        url: "https://wa.me/5527999497001",
+        texto: " SEGURO DE CARRO DDD (27)99949-7001 CONSÓRCIO ENTRE OUTROS"
+      },
+      {
+        url: "https://www.larissasaib.com.br/",
+        texto: "Solução capilar"
+      },
+    ];
+
+    // IDs de vídeos do YouTube para exibir aleatoriamente
+    const videoIDs = [
+      "3Qy1tbogsUo",
+      "gBclanEnn88"
+    ];
+
+    // Função para gerar um código aleatório com tamanho definido
+    function gerarCodigoUnico(tamanho) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let resultado = '';
+      for (let i = 0; i < tamanho; i++) {
+        resultado += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return resultado;
+    }
+
+    // Função que atualiza a propaganda e o vídeo periodicamente
+    function atualizarPropaganda() {
+      // Escolhe um link e um vídeo aleatoriamente
+      const item = links[Math.floor(Math.random() * links.length)];
+      const videoID = videoIDs[Math.floor(Math.random() * videoIDs.length)];
+
+      // Gera um código único de 10 caracteres
+      const codigo = gerarCodigoUnico(10);
+
+      // Atualiza o link e seu texto dinâmico no popup
+      const linkElement = document.getElementById('ok');
+      linkElement.href = item.url;
+      linkElement.innerHTML = `${item.texto} (Código: ${codigo})`;
+
+      // Atualiza o título da propaganda com o código no popup
+      document.getElementById('ad-title').innerText = `🔥 OFERTA clique no link da oferta e descubra ${codigo}`;
+
+      // Mostra o código exclusivo no popup
+      document.getElementById('unique-code').innerText = `Seu código exclusivo: ${codigo}`;
+
+      // Atualiza o código aleatório visível no corpo da página
+      document.getElementById('codigo-no-corpo').innerText = `Código aleatório: ${codigo}`;
+
+      // Atualiza o vídeo no iframe
+      const iframe = document.getElementById('ad-video');
+      iframe.src = `https://www.youtube.com/embed/${videoID}?autoplay=0&mute=1`;
+    }
+
+    // Inicializa a propaganda ao carregar e atualiza a cada 10 segundos (10000 ms)
+    atualizarPropaganda();
+    setInterval(atualizarPropaganda, 10000);
+  </script>
+</body>
+</html>
